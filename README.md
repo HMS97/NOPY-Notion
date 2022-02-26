@@ -19,7 +19,7 @@ datasetID = 31e877cc74d541f7bb2f06e4708e242c
 ## Usage
 
 ```
-from NOTIONPY import NOTIONPY
+from NotionPy import NOTIONPY
 
 # Get database ID from page URL
 no = NOTIONPY(token,databaseId)
