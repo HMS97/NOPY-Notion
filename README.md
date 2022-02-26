@@ -1,5 +1,6 @@
 # NOTIONPY
-NOTION
+NOTIONPY uses notion api to add data to dataset
+
 
 
 ## Quickstart
