@@ -1,8 +1,10 @@
 import requests 
 import json
 
+
+
 class NOTIONPY():
-    def __init__(self,token,databaseId, columns_list = ['iou','data']):
+    def __init__(self,token,databaseId):
         self.token = token
         self.datasetId = databaseId
         self.URL = f"https://api.notion.com/v1/databases/{self.datasetId}"
@@ -10,7 +12,7 @@ class NOTIONPY():
                     "Notion-Version": "2021-05-13",
                     "Authorization": "Bearer " + self.token,
                     "Content-Type": "application/json"}
-        self.columns_list = columns_list
+        self.columns_list = []
         self.update_column()
         
     def create_dataset(self):
@@ -27,7 +29,7 @@ class NOTIONPY():
 
         for item in in_dic.keys():
             if item not in self.columns_list and item != 'Name':
-                self.update_column(item)
+                self.update_column([item])
                 print('added column', item)
 
 
@@ -39,7 +41,7 @@ class NOTIONPY():
             if item  == 'Name':
                 self.add_name(in_dic[item])
                 continue
-            self.add_value(item,in_dic[item])
+            self.add_value(item,str(in_dic[item]))
         print( self.payload)
         self.URL = "https://api.notion.com/v1/pages"
 
@@ -72,26 +74,3 @@ class NOTIONPY():
             for item in self.columns_list:
                 self.payload['properties'][item] = {'rich_text':{}} 
         self.create_dataset()
-    
-    def add_name(self,value):
-        self.payload['properties']['Name'] =  {'title': [{'text': {'content': value}}]}
-        return self.payload    
-    
-    def update_column(self,columns = None):
-        """
-        update notion's columns
-        columns: list 
-        """
-        if columns != None:
-            self.columns_list.extend(columns)
-        self.payload = {
-                "parent": { "database_id": self.datasetId },
-                "properties": {
-                    "Name": {
-                        "title":{}
-                    }}}
-        if self.columns_list != None: 
-            for item in self.columns_list:
-                self.payload['properties'][item] = {'rich_text':{}} 
-        self.create_dataset()
-    
