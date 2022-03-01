@@ -3,7 +3,7 @@ import json
 
 
 
-class NOTIONPY():
+class NOPY():
     def __init__(self,token,databaseId):
         self.token = token
         self.datasetId = databaseId
