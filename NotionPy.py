@@ -37,7 +37,7 @@ class NOTIONPY():
             self.add_value(item,in_dic[item])
             
         response = requests.request(
-                "POST", URL, headers=self.HEADERS, data=json.dumps(self.payload))
+                "POST", self.URL, headers=self.HEADERS, data=json.dumps(self.payload))
         return 
     
     def add_value(self,column,value):
