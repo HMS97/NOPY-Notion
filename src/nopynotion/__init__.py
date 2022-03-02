@@ -8,12 +8,14 @@ class NOPY():
     def __init__(self,token,databaseId):
         self.token = token
         self.datasetId = databaseId
-        self.URL = f"https://api.notion.com/v1/databases/{self.datasetId}"
         self.HEADERS = {
                     "Notion-Version": "2021-05-13",
                     "Authorization": "Bearer " + self.token,
                     "Content-Type": "application/json"}
-        self.columns_list = []
+        self.URL = f'https://api.notion.com/v1/databases/{databaseId}'        
+        response = requests.request(
+            "GET", self.URL, headers=nopy.HEADERS )
+        self.columns_list = list(response.json()['properties'].keys())
         self.update_column()
         
     def create_dataset(self):
@@ -45,7 +47,7 @@ class NOPY():
             self.add_value(item,str(in_dic[item]))
         self.URL = "https://api.notion.com/v1/pages"
 
-        response = requests.request(
+        self.response = requests.request(
                 "POST", self.URL, headers=self.HEADERS, data=json.dumps(self.payload))
         return 
     
@@ -70,7 +72,7 @@ class NOPY():
                     "Name": {
                         "title":{}
                     }}}
-        if self.columns_list != None: 
-            for item in self.columns_list:
+        if columns != None: 
+            for item in columns:
                 self.payload['properties'][item] = {'rich_text':{}} 
         self.create_dataset()
