@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name='nopynotion',
-    version='0.2.2',
+    version='0.2.3',
     packages=['nopynotion'],
     description='a warpper for notion to update data',
     author='Huiming Sun',

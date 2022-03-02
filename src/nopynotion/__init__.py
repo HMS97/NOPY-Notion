@@ -2,7 +2,6 @@ import requests
 import json
 
 
-
 class NOPY():
     def __init__(self,token,databaseId):
         self.token = token
@@ -42,7 +41,6 @@ class NOPY():
                 self.add_name(in_dic[item])
                 continue
             self.add_value(item,str(in_dic[item]))
-        print( self.payload)
         self.URL = "https://api.notion.com/v1/pages"
 
         response = requests.request(
