@@ -14,19 +14,19 @@ Need the latest version of NOTIONPY requires Python 3.5 or greater.
 
 ```
 URL = https://www.notion.so/username/31e877cc74d541f7bb2f06e4708e242c?v=39844aa472bc40989d97f85ec46ef1bd
-datasetID = 31e877cc74d541f7bb2f06e4708e242c
+datasetID = 
+```
+## install
+```
+pip install nopynotion
 ```
 
 ## Usage
 
 ```
-from NotionPy import NOTIONPY
-
-# Get database ID from page URL
-no = NOTIONPY(token,databaseId)
-
-# update notion dataset column
-no.update_column(['iou','data])
+from nopynotion import NOPY
+#initialize the NOPY instance
+no = NOPY(token,datasetID)
 
 # update the value
 no.add_col_value({'iou':'33',"Name":'hul2u','data':'233s2'})
